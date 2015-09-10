@@ -1,0 +1,65 @@
+<html>
+<head>
+    <title>Model Test</title>
+
+    <style type="text/css">
+        .busCard {
+            height: 400px;
+            width: 600px;
+            border: 1px solid black;
+        }
+        .username {
+            margin: auto;
+            left: 50%;
+        }
+    </style>
+
+</head>
+<body ng-app="modelTest">
+
+    <form name="userForm" novalidate>
+        <label for="name">Name</label>
+        <input type="text" id="name" ng-model="user.name" required>
+        <br>
+        <label for="email">Email</label>
+        <input type="email" id="email" ng-model="user.email" required>
+        <br>
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob"  ng-model="user.dob" required>
+        <br>
+        <label for="github">Github</label>
+        <input type="text" id="github" ng-model="user.github" required minlength="6">
+        <br>
+        <label>Icon</label>
+        <select name="icon" ng-model="icon">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </form>
+
+    <!-- <div ng-if="userForm.$valid"> -->
+        <div class="busCard" ng-if="userForm.$valid">
+            <div class="cardIcon">
+                <img ng-src="/img/icon{{ icon }}.jpg">
+            </div>
+            <div class="username">
+                <h1>{{ user.name }}</h1>
+            </div>
+            <div class="email">
+                {{ user.email }}
+            </div>
+            <div class="dob">
+                {{ user.dob | date}}
+            </div>
+            <div class="github">
+                {{ user.github }}
+            </div>
+        </div>
+    <!-- </div> -->
+
+
+<script type="text/javascript" src="/js/angular.min.js"></script>
+<!-- <script type="text/javascript" src="/js/modelTest.js"></script> -->
+</body>
+</html>

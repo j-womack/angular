@@ -1,0 +1,73 @@
+<html ng-app="controllerTest">
+<head>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+    <div class='main container'>
+
+        <h1>Create an Item</h1>
+        <div ng-controller="CartController as cart">
+            <form name="itemEntry" class="form-inline" ng-submit="cart.addNewItem()"novalidate>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" ng-model="cart.newItem.name" required>
+
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" ng-model="cart.newItem.quantity" required>
+
+                    <label for="price">Price</label>
+                    <input type="number" id="price"  ng-model="cart.newItem.price" required>
+                    
+                    <div class="form-group" ng-if="itemEntry.$valid">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                
+                </div>
+            </form>
+
+            <div ng-show="cart.items">
+                <table class="table table-hover">
+                    <tr ng-repeat="item in cart.items">
+                        <td>{{ item.name }}</td>
+                        <td>
+                            <label for="quantity"></label>
+                            <input type="number" id="quantity" ng-model="item.quantity" ng-change="cart.onChange()" required>
+                        </td>
+                        <td>{{ item.price * item.quantity | currency:"$" }}</td>
+                        <td><a class="btn btn-danger" ng-click="cart.removeItem(index)"><span class="glyphicon glyphicon-remove"></a></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Subtotal:</td>
+                        <td>{{ cart.subtotal | currency:"$" }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Tax:</td>
+                        <td>{{ cart.tax | currency:"$" }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Shipping:</td>
+                        <td>{{ cart.shipping | currency:"$" }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Total:</td>
+                        <td>{{ cart.total | currency:"$" }}</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+<script type="text/javascript" src="/js/angular.min.js"></script>
+<script type="text/javascript" src="/js/controllerTest.js"></script>
+</body>
+</html>
